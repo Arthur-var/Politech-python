@@ -9,13 +9,13 @@ def count_letters(text):
 
 
 # TODO Напишите функцию calculate_frequency
-def calculate_frequency(medium_dick):
+def calculate_frequency(dict_text):
     amount = 0
-    for key, value in medium_dick.items():
+    for key, value in dict_text.items():
         amount += value
-    for key, value in medium_dick.items():
-        medium_dick[key] = round(value/amount, 2)
-    return medium_dick
+    for key, value in dict_text.items():
+        dict_text[key] = round(value/amount, 2)
+    return dict_text
 
 
 main_str = """
