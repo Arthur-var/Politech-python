@@ -1,19 +1,38 @@
 # TODO решите задачу
 def task() -> float:
-    amount = 0
-    score = 0
-    weight = 0
-    with open("input.json", 'r') as f:
+    with open('input.json', "r") as f:
         a = f.readlines()
-    for i in range(len(a)):
-        if a[i].find("score") != -1:
-            score = float(a[i][((a[i].find("score")) + 8):len(a[i]) - 2])
-        elif (a[i].find("weight")) != -1:
-            weight = float(a[i][((a[i].find("weight")) + 9):len(a[i]) - 1])
-        if (score != 0) and (weight != 0):
-            amount += score * weight
-            score, weight = 0, 0
-    return round(amount, 3)
+
+        lst = list()
+        dt = dict()
+
+        for line in a:
+            if '{' in line:
+                dt = dict()
+            elif '}' in line:
+                lst.append(dt)
+            key = str()
+            value = str()
+            flag = False
+
+            for i in range(len(line)):
+                if line[i] == '"' and not flag:
+                    flag = True
+                elif flag and line[i] != '"':
+                    key += line[i]
+                elif flag and line[i] == '"':
+                    flag = False
+                elif not flag and (line[i].isdigit() or line[i] == '.'):
+                    value += line[i]
+                elif not flag and (line[i] == ',' or line[i] == '\n'):
+                    if key != '':
+                        dt[key] = value
+                    key = ''
+                    value = ''
+    amount = 0
+    for d in lst:
+        amount += float(d['score']) * float(d['weight'])
+    return amount
 
 
-print(task())
+print(round(task(), 3))
