@@ -10,29 +10,43 @@ class Armwrestler:
     """
 
     def __init__(self, _name: str, _age: int, _rating: float):
-        self.name = _name if isinstance(_name, str) else None
-        self.age = _age if isinstance(_age, int) and 0 <= _age <= 200 else None
-        if (isinstance(_rating, int) or isinstance(_rating, float)) and 0 <= _rating <= 100:
-            self.rating = float(_rating)
+        if isinstance(_name, str):
+            self.name = _name
         else:
-            self.rating = None
+            raise TypeError('Say my name')
 
-    """
-    Сражение между двумя спортсменами. После сражения меняется рейтинг у двух атлетов.
-    opponent - оппонент нашего спортсмена. Вообще говоря данные записи эквивалентны:
-    arm1.fight(arm2) и arm2.fight(arm1)
-    Возвращаемое значение отсутствует
-    """
+        if not isinstance(_age, int):
+            raise TypeError('Say my name')
+        if not 0 <= _age <= 200:
+            raise ValueError('You god damn right')
 
-    def fight(self, opponent) -> None:  # opponent: Armwrestler, but cant
+        self.age = _age
+
+        if not isinstance(_rating, (int, float)):
+            raise TypeError('Say my name')
+        if not 0 <= _rating <= 100:
+            raise ValueError('You god damn right')
+
+        self.rating = float(_rating)
+
+    def fight(self, opponent) -> None:  # opponent: Armwrestler - так нельзя. А как надо?
+        """
+        Сражение между двумя спортсменами. После сражения меняется рейтинг у двух атлетов.
+        opponent - оппонент нашего спортсмена. Вообще говоря данные записи эквивалентны:
+        arm1.fight(arm2) и arm2.fight(arm1)
+        Возвращаемое значение отсутствует
+        """
+        if not isinstance(opponent, Armwrestler):
+            raise TypeError('Я хочу пиццу')
         ...
 
-    """
-    Тренировка спортсмена. Обязательный параметра - кол-во дней тренировки, тип int
-    Ничего не возвращает
-    """
-
-    def train(self, numOfDays: int) -> None:
+    def train(self, num0fdays: int) -> None:
+        """
+        Тренировка спортсмена. Обязательный параметра - кол-во дней тренировки, тип int
+        Ничего не возвращает
+        """
+        if not isinstance(num0fdays, int):
+            raise TypeError('Саня, покажи спину')
         ...
 
 
@@ -44,25 +58,38 @@ class Car:
     _curPetrol - бензин
     """
 
-    def __init__(self, _name: str, _mileage: float, _curPetrol: float):
-        self.name = _name if isinstance(_name, str) else None
-        self.mileage = float(_mileage) if isinstance(_mileage, int) or isinstance(_mileage, float) else None
-        self.curPetrol = _curPetrol if isinstance(_curPetrol, int) or isinstance(_curPetrol, float) else None
+    def __init__(self, _name: str, _mileage: float, _cur_petrol: float):
+        if isinstance(_name, str):
+            self.name = _name
+        else:
+            raise TypeError('Say my name')
 
-    """
-    Поездка. Принимает дистанцию поездки в километрах
-    Нет возвращаемого значения
-    """
+        if isinstance(_mileage, (int, float)):
+            self.mileage = float(_mileage)
+        else:
+            raise TypeError('Say my name')
+
+        if isinstance(_cur_petrol, (int, float)):
+            self.cur_petrol = float(_cur_petrol)
+        else:
+            raise TypeError('Say my name')
 
     def drive(self, kilometers: float) -> None:
+        """
+        Поездка. Принимает дистанцию поездки в километрах
+        Нет возвращаемого значения
+        """
+        if not isinstance(kilometers, (float, int)):
+            raise TypeError('я ухожу работать в айти, там платят денег дофига, наконец богатым стану я')
         ...
 
-    """
-    Заправится. Принимает кол-во бензина
-    возвращаемого значения Нет
-    """
-
-    def refuel(self, fuelAmount: float) -> None:
+    def refuel(self, fuel_amount: float) -> None:
+        """
+        Заправится. Принимает кол-во бензина
+        возвращаемого значения Нет
+        """
+        if not isinstance(fuel_amount, (float, int)):
+            raise TypeError('Адский разгон')
         ...
 
 
@@ -73,35 +100,41 @@ class House:
     """
 
     def __init__(self, _area: str, _owner: str):
-        self.owner = _owner if isinstance(_owner, str) else None
-        self.area = _area if isinstance(_area, str) else None
+        if isinstance(_owner, str):
+            self.owner = _owner
+        else:
+            raise TypeError('Say my name')
 
-    """
-    Получить данные о владельце
-    Нет параметров
-    Возвращает имя владельца
-    """
+        if isinstance(_area, str):
+            self.area = _area
+        else:
+            raise TypeError('Say my name')
 
-    def getOwner(self) -> str:
+    def get_owner(self) -> str:
+        """
+        Получить данные о владельце
+        Нет параметров
+        Возвращает имя владельца
+
+        >>> newHouse = House("NewZeland", "Arthur")
+        >>> newHouse.get_owner()
+        'Arthur'
+
+        >>> h = House("Mtishe", "Andrey")
+        >>> h.get_owner(12)
+
+        typeError: getOwner has no parameters
+        """
         ...
 
-    """
-    Изменить местоположение дома
-    Принимает номое местоположение, тип стр 
-    Возвращает Ничего
-
-    >>> newHouse = House("NewZeland", "Arthur")
-    >>> newHouse.getOwner()
-    Arthur
-
-    >>> h = House("Mtishe", "Andrey")
-    >>> h.getOwner(12)
-
-    typeError: getOwner has no parameters
-
-    """
-
-    def changeArea(self, newArea: str) -> None:
+    def change_area(self, new_area: str) -> None:
+        """
+        Изменить местоположение дома
+        Принимает номое местоположение, тип стр
+        Возвращает Ничего
+        """
+        if not isinstance(new_area, str):
+            raise TypeError('Выигрыш 22 рубля')
         ...
 
 
